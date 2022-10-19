@@ -7,11 +7,11 @@ from pm4py.objects.petri_net.utils import petri_utils
 initial_markings, final_markings = [], []
 
 def prev_transitions(net, transition):
+    # searching places source from None transition
     for arc in list(transition.in_arcs):
-        # searching places source from None transition
+        # searching all transitions in from the current place
         place = arc.source
         for arc in list(place.in_arcs):
-            # searching all transitions in from the current place
             source = arc.source
             # if source transition is not None, appending to list of final markings
             if source.label != None:
