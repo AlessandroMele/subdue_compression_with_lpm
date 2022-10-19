@@ -7,25 +7,32 @@ from pm4py.objects.petri_net.utils import petri_utils
 initial_markings, final_markings = [], []
 
 def prev_transitions(net, transition):
-    
     for arc in list(transition.in_arcs):
+        # searching places source from None transition
         place = arc.source
         for arc in list(place.in_arcs):
+            # searching all transitions in from the current place
             source = arc.source
+            # if source transition is not None, appending to list of final markings
             if source.label != None:
                 final_markings.append(source.label)
             else:
+                # recursion with same net without the current place
                 net = petri_utils.remove_place(net, place)
                 prev_transitions(net, source)
 
 def next_transitions(net, transition):
+    # searching places target from None transition
     for arc in list(transition.out_arcs):
             place = arc.target
+            # searching all transitions out from the current place
             for arc in list(place.out_arcs):
                 target = arc.target
+                # if target transition is not None, appending to list of initial markings
                 if target.label != None:
                     initial_markings.append(target.label)
                 else:
+                    # recursion with same net without the current place
                     net = petri_utils.remove_place(net, place)
                     next_transitions(net, target)
 
