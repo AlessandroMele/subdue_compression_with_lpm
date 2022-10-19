@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<pnml>
+	<net id="net1" type="http://www.pnml.org/version-2009/grammar/pnmlcoremodel">
+		<name>
+			<text>
+				fc8e4a80-4ddc-4377-8ba9-65885e64bd85 [Reduced] [Reduced]
+			</text>
+		</name>
+		<page id="n0">
+			<name>
+				<text />
+			</name>
+			<place id="n1">
+				<name>
+					<text>
+						source 1
+					</text>
+				</name>
+				<toolspecific tool="ProM" version="6.4" localNodeID="88aeb6d0-8669-48ff-b935-2075a565409d" />
+				<graphics>
+					<position x="6.25" y="66.5" />
+					<dimension x="12.5" y="12.5" />
+				</graphics>
+				<initialMarking>
+					<text>
+						1
+					</text>
+				</initialMarking>
+			</place>
+			<place id="n2">
+				<name>
+					<text>
+						sink 6
+					</text>
+				</name>
+				<toolspecific tool="ProM" version="6.4" localNodeID="ab7738c9-0647-487b-bc04-c68e03e22a35" />
+				<graphics>
+					<position x="258.75" y="83.0" />
+					<dimension x="12.5" y="12.5" />
+				</graphics>
+			</place>
+			<place id="n3">
+				<name>
+					<text>
+						sink 7
+					</text>
+				</name>
+				<toolspecific tool="ProM" version="6.4" localNodeID="8d517c9e-8278-4151-a66c-395596bfefe7" />
+				<graphics>
+					<position x="93.75" y="65.5" />
+					<dimension x="12.5" y="12.5" />
+				</graphics>
+			</place>
+			<place id="n4">
+				<name>
+					<text>
+						middle 10
+					</text>
+				</name>
+				<toolspecific tool="ProM" version="6.4" localNodeID="6963ead5-63b2-47bb-9b0b-78610913699d" />
+				<graphics>
+					<position x="181.25" y="72.0" />
+					<dimension x="12.5" y="12.5" />
+				</graphics>
+			</place>
+			<transition id="n5">
+				<name>
+					<text>D</text>
+				</name>
+				<toolspecific tool="ProM" version="6.4" activity="D" localNodeID="e30afaf8-add1-4a0a-a1a5-057b40ea2248" />
+				<graphics>
+					<position x="50.0" y="66.5" />
+					<dimension x="25.0" y="20.0" />
+					<fill color="#FFFFFF" />
+				</graphics>
+			</transition>
+			<transition id="n6">
+				<name>
+					<text>A</text>
+				</name>
+				<toolspecific tool="ProM" version="6.4" activity="A" localNodeID="540288ad-6347-46a8-990d-7bdb57f50691" />
+				<graphics>
+					<position x="137.5" y="77.0" />
+					<dimension x="25.0" y="20.0" />
+					<fill color="#FFFFFF" />
+				</graphics>
+			</transition>
+			<transition id="n8">
+				<name>
+					<text>F</text>
+				</name>
+				<toolspecific tool="ProM" version="6.4" activity="F" localNodeID="104bf4f2-b6dc-4418-ab02-b8ae6478d3a1" />
+				<graphics>
+					<position x="220.0" y="83.0" />
+					<dimension x="15.0" y="15.0" />
+				</graphics>
+			</transition>
+			<arc id="arc9" source="n1" target="n5">
+				<name>
+					<text>
+						source 1 -[1]-&gt; HRRAN
+					</text>
+				</name>
+				<toolspecific tool="ProM" version="6.4" localNodeID="6566bfba-af7f-4c95-a2e8-99d2c58f7475" />
+				<arctype>
+					<text>
+						normal
+					</text>
+				</arctype>
+			</arc>
+			<arc id="arc10" source="n8" target="n2">
+				<name>
+					<text>
+						tau from tree6 -[1]-&gt; sink 6
+					</text>
+				</name>
+				<toolspecific tool="ProM" version="6.4" localNodeID="7c6f9bb6-85cd-45f0-82ba-680b93e655f0" />
+				<arctype>
+					<text>
+						normal
+					</text>
+				</arctype>
+			</arc>
+			<arc id="arc11" source="n3" target="n6">
+				<name>
+					<text>
+						sink 7 -[1]-&gt; FHRRPC
+					</text>
+				</name>
+				<toolspecific tool="ProM" version="6.4" localNodeID="62b205ce-b2f8-4613-9b4e-844603870376" />
+				<arctype>
+					<text>
+						normal
+					</text>
+				</arctype>
+			</arc>
+			<arc id="arc12" source="n5" target="n3">
+				<name>
+					<text>
+						HRRAN -[1]-&gt; sink 7
+					</text>
+				</name>
+				<toolspecific tool="ProM" version="6.4" localNodeID="cad4e4ee-8a37-4c30-8f08-1c74bac77249" />
+				<arctype>
+					<text>
+						normal
+					</text>
+				</arctype>
+			</arc>
+			<arc id="arc13" source="n4" target="n8">
+				<name>
+					<text>
+						middle 10 -[1]-&gt; tau from tree6
+					</text>
+				</name>
+				<toolspecific tool="ProM" version="6.4" localNodeID="cef8ef18-f87b-4d6c-b866-4d9bee5a3002" />
+				<arctype>
+					<text>
+						normal
+					</text>
+				</arctype>
+			</arc>
+			<arc id="arc15" source="n6" target="n4">
+				<name>
+					<text>
+						FHRRPC -[1]-&gt; middle 10
+					</text>
+				</name>
+				<toolspecific tool="ProM" version="6.4" localNodeID="c2f87fcb-24d1-469a-9839-9ae458de82a1" />
+				<arctype>
+					<text>
+						normal
+					</text>
+				</arctype>
+			</arc>
+		</page>
+		<finalmarkings>
+			<marking>
+				<place idref="n1">
+					<text>
+						0
+					</text>
+				</place>
+				<place idref="n2">
+					<text>
+						1
+					</text>
+				</place>
+				<place idref="n3">
+					<text>
+						0
+					</text>
+				</place>
+				<place idref="n4">
+					<text>
+						0
+					</text>
+				</place>
+			</marking>
+		</finalmarkings>
+	</net>
+</pnml>

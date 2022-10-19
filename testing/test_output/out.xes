@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<log xes.version="1849-2016" xes.features="nested-attributes" xmlns="http://www.xes-standard.org/">
+	<string key="lifecycle:model" value="standard" />
+	<string key="creator" value="Fluxicon Disco" />
+	<string key="liFHRRPCrary" value="Fluxicon Octane" />
+	<string key="concept:name" value="Anonymous log imported from 2000-suFHRRPCprocess6-WithDeviatins(0.3,0).xes" />
+	<trace>
+		<string key="variant" value="Variant 199" />
+		<int key="variant-index" value="199" />
+		<string key="creator" value="Fluxicon Disco" />
+		<string key="concept:name" value="trace_0" />
+		<event>
+			<string key="org:resource" value="NONE" />
+			<string key="lifecycle:transition" value="complete" />
+			<string key="concept:name" value="LPMIteration:0" />
+			<date key="time:timestamp" value="2013-12-01T08:01:24.772000+01:00" />
+		</event>
+		<event>
+			<string key="org:resource" value="NONE" />
+			<string key="lifecycle:transition" value="complete" />
+			<string key="concept:name" value="C" />
+			<date key="time:timestamp" value="2013-12-01T10:01:24.772000+01:00" />
+		</event>
+		<event>
+			<string key="org:resource" value="NONE" />
+			<string key="lifecycle:transition" value="complete" />
+			<string key="concept:name" value="LPMIteration:0" />
+			<date key="time:timestamp" value="2013-12-01T11:01:24.772000+01:00" />
+		</event>
+	</trace>
+</log>
