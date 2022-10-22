@@ -207,17 +207,16 @@ if __name__ == "__main__":
     """
     ########
     # TERMINAL
-    # !!! FOLDER WHERE TO LAUNCH/DEBUG CODE MUST BE **subdue_extended** IF USING RELATIVE PATH !!!
+    # !!! FOLDER WHERE TO LAUNCH/DEBUG CODE MUST BE **subdue_compression_with_lpm** IF USING RELATIVE PATH !!!
     # !!! FOLDERS MUST EXIST !!!
-    # python3 subdue_extended.py ./input/test.xes ./output/test.xes ./input/LPMs/ 1
+    # python3 subdue_extended.py ./input/file.xes ./output/out.xes ./input/LPMs/ 1
     input_xes, output_xes, input_lpms, limit  = str(sys.argv[1]), str(sys.argv[2]), str(sys.argv[3]), int(sys.argv[4])
-    ########
-
-    ########
+ 
+ 
     # GENERAL
-    # !!! FOLDER WHERE TO LAUNCH/DEBUG CODE MUST BE **subdue_extended** IF USING RELATIVE PATH !!!
+    # !!! FOLDER WHERE TO LAUNCH/DEBUG CODE MUST BE **subdue_compression_with_lpm** IF USING RELATIVE PATH !!!
     # !!! FOLDERS MUST EXIST !!!
-    input_xes = "./input/test.xes"
+    input_xes = "./input/file.xes"
     out_xes = "./output/out.xes"
     input_lpms = "./input/LPMs/"
     limit = 1
@@ -225,7 +224,7 @@ if __name__ == "__main__":
     """
 
     ########
-    # !!! FOLDER WHERE TO LAUNCH/DEBUG CODE MUST BE **subdue_extended** IF USING RELATIVE PATH !!!
+    # !!! FOLDER WHERE TO LAUNCH/DEBUG CODE MUST BE **subdue_compression_with_lpm** IF USING RELATIVE PATH !!!
     # !!! FOLDERS MUST EXIST !!!
     # PRESENTAZIONE
     input_xes = "./testing/test_input/test_esempio_7.xes"
