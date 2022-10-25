@@ -39,17 +39,11 @@ def next_transitions(net, transition):
                     net = petri_utils.remove_place(net, place)
                     next_transitions(net, target)
 
-def extract_initial_final_markings(input_lpms, num):
+def extract_initial_final_markings(input_lpms, num, prefix, suffix):
         # there are two nets, because recursion for initial_markings delete places,
         # so we risk that results of final_markings are influenced by the previous
-
-        prev_net, initial_marking, final_marking = pm.read_pnml(input_lpms+"testLaura_"+str(num)+".pnml")
-        next_net, initial_marking, final_marking = pm.read_pnml(input_lpms+"testLaura_"+str(num)+".pnml")
-        """
-        # Nei nostri test gli lpm partono da 1, mentre in quelli della prof partono da 0
-        prev_net, initial_marking, final_marking = pm.read_pnml(input_lpms+"testLaura_"+str(num-1)+".pnml")
-        next_net, initial_marking, final_marking = pm.read_pnml(input_lpms+"testLaura_"+str(num-1)+".pnml")
-        """
+        prev_net, initial_marking, final_marking = pm.read_pnml(input_lpms+prefix+str(num)+"."+suffix)
+        next_net, initial_marking, final_marking = pm.read_pnml(input_lpms+prefix+str(num)+"."+suffix)
         
         pm.view_petri_net(prev_net, initial_marking, final_marking)
         
@@ -81,26 +75,11 @@ def extract_initial_final_markings(input_lpms, num):
                     #recursion whit net2
                     prev_transitions(prev_net, source)
         
-        """
-        for arc in initial_place.out_arcs:
-            target = arc.target
-            if target.label != None:
-                initial_markings.append(target.label)
-            else:
-                next_transitions(next_net, target)
-
-        for arc in final_place.in_arcs:
-            source = arc.source
-            if source.label != None:
-                final_markings.append(source.label)
-            else:
-                prev_transitions(prev_net, source)
-        """
         ordered_initial_markings = sorted(initial_markings)
         ordered_final_markings = sorted(final_markings)
         return ordered_initial_markings, ordered_final_markings
 
-def compression(input_xes, input_lpms, limit, out_xes):
+def compression(input_xes, input_lpms, limit, out_xes, prefix, suffix):
     """
     Count number of occurrences in xes file, and each time that LPM appears, increasing relative index
     on the list
@@ -119,10 +98,8 @@ def compression(input_xes, input_lpms, limit, out_xes):
     while(iteration < limit):
         for trace in file_xes:
             for event in trace:
-                # getting LPM values as "[v1, ..., vN]"
-                lpms_event_string = event._dict["LPMs_list"]
                 
-                # converting list in [v1, ..., vN]
+                lpms_event_string = event._dict["LPMs_list"]
                 lpms_event_list = extract_list(lpms_event_string)
                 
                 # iterating on list values
@@ -130,22 +107,14 @@ def compression(input_xes, input_lpms, limit, out_xes):
                     # in the algorythm LPMs start from one, while in the list from zero
                     count_list[lpm] += 1
                     
-                    """
-                    Nei nostri test gli lpm partono da 1
-                    count_list[lpm-1] += 1
-                    """
 
         # most frequent index of LPMs
-        """
-        # nei nostri test gli lpm partono da 1
-        max_index = count_list.index(max(count_list)) +1
-        """
         max_index = count_list.index(max(count_list))
 
         print(count_list)
         print("Max index in lpm: "+str(max_index))
 
-        initial_markings, final_markings = extract_initial_final_markings(input_lpms, max_index)
+        initial_markings, final_markings = extract_initial_final_markings(input_lpms, max_index, prefix, suffix)
 
         """
         Having found the LPMS that compresses the most, one modifies the xes by scrolling through the traces, and for each event,
@@ -201,11 +170,9 @@ def compression(input_xes, input_lpms, limit, out_xes):
                     else:
                         new_trace = False
                         # you replace the name and delete the list of lpm.
-                        event._dict['concept:name'] = 'LPM'+str(max_index)+'Iteration:'+str(iteration)
+                        event._dict['concept:name'] = 'LPM:'+str(max_index)+'_Iteration:'+str(iteration)
                         
-                        #scommentare, commentato per test nostro
-                        #del event._dict["LPMs_list"]
-                        
+                        del event._dict["LPMs_list"]
                         del event._dict["LPMs_binary"]
                         del event._dict["LPMs_frequency"]
                         
@@ -215,9 +182,7 @@ def compression(input_xes, input_lpms, limit, out_xes):
                     # if the index of the most frequent does not appear in the list of lpms.
                     # you delete the list of lpms.
                     
-                    #scommentare, commentato per test nostro
-                    #del event._dict["LPMs_list"]
-                    
+                    del event._dict["LPMs_list"]
                     del event._dict["LPMs_binary"]
                     del event._dict["LPMs_frequency"]
                     new_trace = True

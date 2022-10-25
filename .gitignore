@@ -3,6 +3,8 @@ testing/PaymentRequest_completeLPMs_Aggregated.xes
 testing/RequestForPayment.xes
 testing/PaymentRequest_completeLPMs_compressed.xes
 
+testing_presentazione
+
 source/__pycache__
 source/compression_with_lpm_riserva.py
 
@@ -10,5 +12,6 @@ Relazione.zip
 Presentazione.pptx
 ~$Presentazione.pptx
 Presentazione.pdf
+subdue_extended_presentazione.py
 algoritmo_solo_compressione.zip
 print_lpm.py

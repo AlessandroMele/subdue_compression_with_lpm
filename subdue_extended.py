@@ -8,6 +8,7 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(description="Subdue compression with Local Process Model")
 
     # RECOGNITION PARAMETERS
+
     parser.add_argument("--LPMs_dir", type=str, default="./testing/LPMPaymentRequest/",
                         help="path to lpms (.pnml format)")
     
@@ -19,6 +20,7 @@ if __name__ == '__main__':
     
     parser.add_argument('--Min_prefix_size', default=2, type=float)
     parser.add_argument('--Max_prefix_size', default=36, type=float)
+    
     ##########
 
     # CONVERSION FROM csv TO xes PARAMETERS
@@ -27,13 +29,21 @@ if __name__ == '__main__':
     ##########
                     
     # COMPRESSION PARAMETERS
+        
     parser.add_argument('--out_xes_file', default="./testing/PaymentRequest_completeLPMs_compressed.xes", type=str,
                         help="path to location store and name of the compressed output file in xes format")
-    
+
     parser.add_argument('--limit', default=1, type=int,
                         help = "number of iteration of the compression module")
-    
+
+    parser.add_argument('--prefix', default="testLaura_", type=str,
+                        help = "template filename of lpm")
+
+    parser.add_argument('--suffix', default="pnml", type=str,
+                        help = "extension of lpm")
+
     args = parser.parse_args()
+    
     ##########
 
     # RECOGNITION MODULE
@@ -44,17 +54,27 @@ if __name__ == '__main__':
     LPMs_folder_name = args.LPMs_dir
 
     lpm_det.lpm_detection(Min_prefix_size, Max_prefix_size, event_log_address, output_address_name_file, LPMs_folder_name)
+    
     ##########
 
     # CONVERSION FROM csv TO xes MODULE
     xes_converted = args.xes_converted
     
     log_conv.from_csv_to_xes(output_address_name_file, xes_converted)
+    
     ##########
 
     # COMPRESSION MODULE
     out_xes = args.out_xes_file
     limit = args.limit
+    prefix = args.prefix
+    suffix = args.suffix
+
+    lpm_comp.compression(xes_converted, LPMs_folder_name, limit, out_xes, prefix, suffix)
     
-    lpm_comp.compression(xes_converted, LPMs_folder_name, limit, out_xes)
     ##########
+
+    # PRESENTAZIONE
+    """
+    python3 subdue_extended.py --xes_converted=testing_presentazione/test_input/test_esempio_7.xes --LPMs_dir=./testing_presentazione/test_input/LPMs/ --out_xes_file=testing_presentazione/test_output/output.xes --prefix=lpm --suffix=apnml
+    """
