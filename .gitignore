@@ -1,11 +1,14 @@
-Presentazione.pptx
-~$Presentazione.pptx
-algoritmo_solo_compressione.zip
-
-source/__pycache__
-
+testing/PaymentRequest_completeLPMs_Aggregated.csv
 testing/PaymentRequest_completeLPMs_Aggregated.xes
 testing/RequestForPayment.xes
+testing/PaymentRequest_completeLPMs_compressed.xes
 
+source/__pycache__
+source/compression_with_lpm_riserva.py
+
+Relazione.zip
+Presentazione.pptx
+~$Presentazione.pptx
+Presentazione.pdf
+algoritmo_solo_compressione.zip
 print_lpm.py
-subdue_extended_riserva.py

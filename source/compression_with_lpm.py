@@ -100,7 +100,7 @@ def extract_initial_final_markings(input_lpms, num):
         ordered_final_markings = sorted(final_markings)
         return ordered_initial_markings, ordered_final_markings
 
-def subdue_extended(input_xes, input_lpms, limit, out_xes):
+def compression(input_xes, input_lpms, limit, out_xes):
     """
     Count number of occurrences in xes file, and each time that LPM appears, increasing relative index
     on the list
