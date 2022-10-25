@@ -1,5 +1,4 @@
 import pm4py as pm
-import json
 import os
 from pathlib import Path
 from pm4py.objects.petri_net.utils import petri_utils
