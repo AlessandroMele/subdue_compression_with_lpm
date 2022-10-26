@@ -34,7 +34,7 @@ if __name__ == '__main__':
                         help="path to location store and name of the compressed output file in xes format")
 
     parser.add_argument('--limit', default=1, type=int,
-                        help = "number of iteration of the compression module")
+                        help = "number of iteration of the compression module, for future developments")
 
     parser.add_argument('--prefix', default="testLaura_", type=str,
                         help = "template filename of lpm")
