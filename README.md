@@ -87,7 +87,7 @@ I parametri sono:
 
 # Testing
 La componente testata è esclusivamente quella legata allo sviluppo del modulo di compressione, ovvero il modulo sviluppato per il seguente progetto didattico.<br>
-Viene dato in input al modulo di compressione un file *.xes* in cui ad ogni evento è assegnata una lista che contiene, se presenti, gli indici dei LPM in cui l’evento occorre.
+Viene dato in input al modulo di compressione un file *.xes* in cui ad ogni evento è assegnata una lista che contiene, se presenti, gli indici dei LPM in cui l’evento occorre.<br>
 Eliminazione del LPM 2:<br>
 <img src = "images/test1.png" width ="600px" height ="200px"></img>
 <br>Eliminazione del LPM 1:<br>
