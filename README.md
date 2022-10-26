@@ -34,7 +34,7 @@ Nella seguente trattazione, è stato utilizzato per generare i *Local Process Mo
 Un LPM è una rete di Petri di piccole dimensioni, generalmente composta da cinque o sei nodi, che identifica un comportamento molto frequente in un event log; Tramite ProM, sono stati generati i LPM che fungeranno da input per l’algoritmo di etichettatura degli eventi nel file di log.<br>
 
 # Algoritmo di etichettatura
-<a href="">L’algoritmo di etichettatura</a> richiede in input un file di log in formato *.xes* e gli LPM precedentemente ottenuti. In output, restituisce il file *.xes* originale in cui ad ogni evento è assegnata una lista che contiene, se presenti, gli indici dei LPM in cui l’evento occorre. <br>
+L’algoritmo di etichettatura, fornito dal tutor di progetto Prof.ssa<a href="https://www.tue.nl/en/research/researchers/laura-genga/"> Laura Genga</a> richiede in input un file di log in formato *.xes* e gli LPM precedentemente ottenuti. In output, restituisce il file *.xes* originale in cui ad ogni evento è assegnata una lista che contiene, se presenti, gli indici dei LPM in cui l’evento occorre. <br>
 L’evento, per poter essere etichettato, deve comparire in una traccia valida, altrimenti non viene contrassegnato; una traccia si dice valida se percorre interamente il LPM dallo stato iniziale a quello finale, senza che rimangano token inutilizzati e senza aggiungerne dei nuovi.<br>
 Di seguito si riporta un esempio:<br>
 <img src = "images/esempio.png" width ="600px" height ="300px"></img>
@@ -44,7 +44,7 @@ Per poter sostituire gli eventi nel file di log, è necessario definire una metr
 Le possibili metriche esaminate sono:
 - numero di eventi contrassegnati con il LPM: calcolata come il numero di eventi in cui occorre l’indice relativo al LPM;
 - numero di tracce che percorrono il LPM moltiplicato per il numero di transizioni del LPM; è il metodo che maggiormente si avvicina alla metrica utilizzata da Subdue e si calcola come *numeroTracce\*DimensioneLPM*.
-L’algoritmo definito nella sezione precedente restituisce il file *.XES* originale in cui ad ogni evento è assegnata una lista che contiene, se presenti, gli indici dei LPM in cui l’evento compare in una traccia valida; perciò, il calcolo della seconda metrica è più semplice, poiché consiste nel scorrere l’event log e calcolare il numero di occorrenze di ogni LPM. <br>
+L’algoritmo definito nella sezione precedente restituisce il file *.xes* originale in cui ad ogni evento è assegnata una lista che contiene, se presenti, gli indici dei LPM in cui l’evento compare in una traccia valida; perciò, il calcolo della seconda metrica è più semplice, poiché consiste nel scorrere l’event log e calcolare il numero di occorrenze di ogni LPM. <br>
 Inoltre, tale metrica definisce esattamente il numero di eventi che saranno sostituiti, perciò si adatta meglio all’obiettivo del progetto.
 
 # Eliminazione del LPM più frequente
@@ -86,6 +86,8 @@ I parametri sono:
 ```
 
 # Testing
+La componente testata è esclusivamente quella legata allo sviluppo del modulo di compressione, ovvero il modulo sviluppato per il seguente progetto didattico.<br>
+Viene dato in input al modulo di compressione un file *.xes* in cui ad ogni evento è assegnata una lista che contiene, se presenti, gli indici dei LPM in cui l’evento occorre.
 Eliminazione del LPM 2:<br>
 <img src = "images/test1.png" width ="600px" height ="200px"></img>
 <br>Eliminazione del LPM 1:<br>
