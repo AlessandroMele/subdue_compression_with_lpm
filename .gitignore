@@ -1,17 +1,21 @@
-testing/PaymentRequest_completeLPMs_Aggregated.csv
-testing/PaymentRequest_completeLPMs_Aggregated.xes
-testing/RequestForPayment.xes
-testing/PaymentRequest_completeLPMs_compressed.xes
+testing/LPMPaymentRequest
+testing/LPMPaymentRequest/RequestForPayment.xes
+testing/LPMPaymentRequest/RequestForPayment_completeLPMs_aggregated.csv
+testing/LPMPaymentRequest/RequestForPayment_completeLPMs_converted.xes
+testing/LPMPaymentRequest/RequestForPayment_completeLPMs_compressed.xes
 
-testing_presentazione
+testing/BPI12_w
+testing/BPI12_w/BPI12_w.xes
+testing/BPI12_w/BPI12_w_completeLPMs_aggregated.csv
+testing/BPI12_w/BPI12_w_completeLPMs_aggregated.xes
+testing/BPI12_w/BPI12_w_completeLPMs_compressed.xes
 
 source/__pycache__
-source/compression_with_lpm_riserva.py
 
 Relazione.zip
 Presentazione.pptx
 ~$Presentazione.pptx
 Presentazione.pdf
-subdue_extended_presentazione.py
-algoritmo_solo_compressione.zip
 print_lpm.py
+
+.vscode

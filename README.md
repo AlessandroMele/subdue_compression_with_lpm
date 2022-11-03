@@ -7,18 +7,18 @@ Dall'analisi preliminare svolta, per soddisfare le specifiche, si renderebbero n
 - Utilizzare una differente metrica di compressione che tenga conto del concetto di traccia;
 - Il processo di sostituzione deve eliminare dal file di log gli eventi della sotto-struttura di interesse, sostituendo la prima occorrenza dell’evento con un’etichetta.
 
-Alla luce delle precedenti problematiche, si è deciso di sviluppare un nuovo algoritmo indipendente da Subdue;
+Alla luce delle precedenti problematiche, si è deciso di sviluppare un nuovo algoritmo indipendente da Subdue.
 
 # Team
 - <a href= "https://github.com/LucreziAntenucci98">Antenucci Lucrezia</a>;
 - <a href= "https://github.com/AlessandroMele">Mele Alessandro</a>;
-- <a href= "https://github.com/dadezzzzz">Traini Davide</a>;
+- <a href= "https://github.com/dadezzzzz">Traini Davide</a>.
 
 # Prerequisiti
 - Visual Studio Code;
 - Python 3.7.4;
 - <a href= "https://pm4py.fit.fraunhofer.de">PM4Py</a>;
-- <a href= "https://pandas.pydata.org/">Pandas</a>;
+- <a href= "https://pandas.pydata.org/">Pandas</a>.
 
 # Installazione delle dipendenze
 PM4Py è il principale riferimento per il Process mining in Python;<br>
@@ -34,7 +34,7 @@ Nella seguente trattazione, è stato utilizzato per generare i *Local Process Mo
 Un LPM è una rete di Petri di piccole dimensioni, generalmente composta da cinque o sei nodi, che identifica un comportamento molto frequente in un event log; Tramite ProM, sono stati generati i LPM che fungeranno da input per l’algoritmo di etichettatura degli eventi nel file di log.<br>
 
 # Algoritmo di etichettatura
-L’algoritmo di etichettatura, fornito dal tutor di progetto Prof.ssa<a href="https://www.tue.nl/en/research/researchers/laura-genga/"> Laura Genga</a> richiede in input un file di log in formato *.xes* e gli LPM precedentemente ottenuti. In output, restituisce il file *.xes* originale in cui ad ogni evento è assegnata una lista che contiene, se presenti, gli indici dei LPM in cui l’evento occorre. <br>
+L’algoritmo di etichettatura, fornito dal tutor di progetto Prof.ssa<a href="https://www.tue.nl/en/research/researchers/laura-genga/"> Laura Genga</a>, richiede in input un file di log in formato *.xes* e gli LPM precedentemente ottenuti. In output, restituisce il file *.xes* originale in cui ad ogni evento è assegnata una lista che contiene, se presenti, gli indici dei LPM in cui l’evento occorre. <br>
 L’evento, per poter essere etichettato, deve comparire in una traccia valida, altrimenti non viene contrassegnato; una traccia si dice valida se percorre interamente il LPM dallo stato iniziale a quello finale, senza che rimangano token inutilizzati e senza aggiungerne dei nuovi.<br>
 Di seguito si riporta un esempio:<br>
 <img src = "images/esempio.png" width ="600px" height ="300px"></img>
@@ -64,31 +64,31 @@ python3 subdue_extended.py *params*
 ```
 I parametri sono:
 ```bash
---LPMs_dir, default="./testing/LPMPaymentRequest/", help="path to lpms"
+--lpms_dir, help="path to lpms (pnml or apnml format)"
 
---raw_log_file, default="./testing/RequestForPayment.xes", help="path to raw xes format log file"
+--raw_log_file, help="path to raw xes format log file"
 
---processed_log_file, default="./testing/PaymentRequest_completeLPMs_Aggregated.csv", help="path to location store and name of the output file in csv format"
+--processed_log_file, help="path to location store and name of the output file in csv format"
     
---Min_prefix_size, default=2
+--min_prefix_size, default=2
 
---Max_prefix_size, default=36
+--max_prefix_size, default=36
     
---xes_converted, default="./testing/PaymentRequest_completeLPMs_Aggregated.xes", help="path to location store and name the converted file from csv to xes format"
+--xes_converted, help="path to location store and name the converted file from csv to xes format"
 
---out_xes_file, default="./testing/PaymentRequest_completeLPMs_compressed.xes", help="path to location store and name of the compressed output file in xes format"
+--xes_compressed, help="path to location store and name of the compressed output file in xes format"
 
---limit, default=1, help = "number of iteration of the compression module"
+--limit, help = "number of iteration of the compression module"
 
---prefix, default="testLaura_", help = "template filename of lpm"
+--prefix, help = "template filename of lpm"
 
---suffix, default="pnml", help = "extension of lpm"
+--suffix, help = "extension of lpm"
 ```
 
 # Testing
-La componente testata è esclusivamente quella legata allo sviluppo del modulo di compressione, ovvero il modulo sviluppato per il seguente progetto didattico.<br>
-Viene dato in input al modulo di compressione un file *.xes* in cui ad ogni evento è assegnata una lista che contiene, se presenti, gli indici dei LPM in cui l’evento occorre.<br>
-Eliminazione del LPM 2:<br>
+La componente testata è esclusivamente quella legata allo sviluppo del modulo di compressione, ovvero il file *compression_with_lpm* sviluppato per il seguente progetto didattico.<br>
+Viene dato in input all'algoritmo di compressione un file *.xes* in cui ad ogni evento è assegnata una lista che contiene, se presenti, gli indici dei LPM in cui l’evento occorre.
+<br>Eliminazione del LPM 2:<br>
 <img src = "images/test1.png" width ="600px" height ="200px"></img>
 <br>Eliminazione del LPM 1:<br>
 <img src = "images/test2.png" width ="600px" height ="200px"></img>

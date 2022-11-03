@@ -107,12 +107,12 @@ def compression(input_xes, input_lpms, limit, out_xes, prefix, suffix):
                     # in the algorythm LPMs start from one, while in the list from zero
                     count_list[lpm] += 1
                     
-
         # most frequent index of LPMs
         max_index = count_list.index(max(count_list))
-
-        print(count_list)
-        print("Max index in lpm: "+str(max_index))
+        
+        for index, elem in enumerate(count_list):
+            print("Index: "+str(index)+" | Count: "+str(elem))
+        print("LPM max index: "+str(max_index))
 
         initial_markings, final_markings = extract_initial_final_markings(input_lpms, max_index, prefix, suffix)
 
