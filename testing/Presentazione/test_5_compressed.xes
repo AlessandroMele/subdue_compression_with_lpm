@@ -12,7 +12,7 @@
 		<event>
 			<string key="org:resource" value="NONE" />
 			<string key="lifecycle:transition" value="complete" />
-			<string key="concept:name" value="LPM:9_Iteration:0" />
+			<string key="concept:name" value="LPM:9_0" />
 			<date key="time:timestamp" value="2013-12-01T08:01:24.772000+01:00" />
 		</event>
 		<event>
@@ -24,13 +24,13 @@
 		<event>
 			<string key="org:resource" value="NONE" />
 			<string key="lifecycle:transition" value="complete" />
-			<string key="concept:name" value="LPM:9_Iteration:0" />
+			<string key="concept:name" value="LPM:9_0" />
 			<date key="time:timestamp" value="2013-12-01T11:01:24.772000+01:00" />
 		</event>
 		<event>
 			<string key="org:resource" value="NONE" />
 			<string key="lifecycle:transition" value="complete" />
-			<string key="concept:name" value="LPM:9_Iteration:0" />
+			<string key="concept:name" value="A" />
 			<date key="time:timestamp" value="2013-12-01T12:01:24.772000+01:00" />
 		</event>
 	</trace>

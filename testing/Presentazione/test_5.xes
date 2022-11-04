@@ -21,9 +21,18 @@
 		<event>
 			<string key="org:resource" value="NONE" />
 			<string key="lifecycle:transition" value="complete" />
+			<string key="concept:name" value="B" />
+			<date key="time:timestamp" value="2013-12-01T10:01:24.772000+01:00" />
+			<string key="LPMs_list" value="+LPM_9+LPM_4+" />
+			<float key="LPMs_binary" value="0.0" />
+			<float key="LPMs_frequency" value="0.0" />
+		</event>
+		<event>
+			<string key="org:resource" value="NONE" />
+			<string key="lifecycle:transition" value="complete" />
 			<string key="concept:name" value="C" />
 			<date key="time:timestamp" value="2013-12-01T10:01:24.772000+01:00" />
-			<string key="LPMs_list" value="+LPM_1+LPM_4" />
+			<string key="LPMs_list" value="+LPM_1+LPM_3+" />
 			<float key="LPMs_binary" value="0.0" />
 			<float key="LPMs_frequency" value="0.0" />
 		</event>
@@ -39,9 +48,18 @@
 		<event>
 			<string key="org:resource" value="NONE" />
 			<string key="lifecycle:transition" value="complete" />
+			<string key="concept:name" value="B" />
+			<date key="time:timestamp" value="2013-12-01T10:01:24.772000+01:00" />
+			<string key="LPMs_list" value="+LPM_9+LPM_4+" />
+			<float key="LPMs_binary" value="0.0" />
+			<float key="LPMs_frequency" value="0.0" />
+		</event>
+		<event>
+			<string key="org:resource" value="NONE" />
+			<string key="lifecycle:transition" value="complete" />
 			<string key="concept:name" value="A" />
 			<date key="time:timestamp" value="2013-12-01T12:01:24.772000+01:00" />
-			<string key="LPMs_list" value="+LPM_3+LPM_9+" />
+			<string key="LPMs_list" value="+LPM_3+" />
 			<float key="LPMs_binary" value="0.0" />
 			<float key="LPMs_frequency" value="0.0" />
 		</event>

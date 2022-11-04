@@ -68,7 +68,7 @@
 			<string key="lifecycle:transition" value="complete" />
 			<string key="concept:name" value="B" />
 			<date key="time:timestamp" value="2013-12-01T12:01:24.772000+01:00" />
-			<string key="LPMs_list" value="+LPM_0+LPM_3" />
+			<string key="LPMs_list" value="+LPM_0+LPM_3+" />
 			<float key="LPMs_binary" value="0.0" />
 			<float key="LPMs_frequency" value="0.0" />
 		</event>
