@@ -6,7 +6,7 @@ from pm4py.objects.petri_net.utils import petri_utils
 # if final markings are parallel, they must 
 # appears on the trace until the lpm is terminated
 # if false, at least one because it's a choice
-is_parallel = {'initial': False,'final': False}
+is_parallel = {'initial': False, 'final': False}
 
 # list of the initial and final markings' net
 initial_markings, final_markings = [], []
@@ -20,16 +20,18 @@ def extract_list(lpm_field):
 def prev_transitions(net, transition):
     # checking if the final markings are parallel, it's
     # enought that it's one time
-    print("Lunghezza: "+str(len(transition.in_arcs)))
     if len(transition.in_arcs) > 1:
-        #print("prima: "+str(final_is_parallel))
         is_parallel['final'] = True
+    
     # searching places source from None transition
     for arc in list(transition.in_arcs):
+        
         # searching all transitions in from the current place
         place = arc.source
+        
         for arc in list(place.in_arcs):
             source = arc.source
+            
             # if source transition is not None, appending to list of final markings
             if source.label != None:
                 final_markings.append(source.label)
@@ -63,6 +65,7 @@ def extract_initial_final_markings(input_lpms, num, prefix, suffix):
         
         #setting initial and final places
         initial_place, final_place = None, None
+
         for place in prev_net.places:
             if place.name == 'n1': initial_place = place 
             if place.name == 'n2': final_place = place 
@@ -91,6 +94,7 @@ def extract_initial_final_markings(input_lpms, num, prefix, suffix):
         
         ordered_initial_markings = sorted(initial_markings)
         ordered_final_markings = sorted(final_markings)
+
         return ordered_initial_markings, ordered_final_markings
 
 def compression(input_xes, input_lpms, limit, out_xes, prefix, suffix):
@@ -128,6 +132,7 @@ def compression(input_xes, input_lpms, limit, out_xes, prefix, suffix):
             print("Index: "+str(index)+" | Count: "+str(elem))
         print("LPM max index: "+str(max_index))
 
+        # extracting list of initial and final markings
         initial_markings, final_markings = extract_initial_final_markings(input_lpms, max_index, prefix, suffix)
 
         """
@@ -150,6 +155,7 @@ def compression(input_xes, input_lpms, limit, out_xes, prefix, suffix):
             while(index < len(trace)):
                 # setting the current event
                 event = trace[index]
+                
                 # setting the next event equal to the current +1
                 next = trace[index+1] if index<len(trace)-1 else None
 
@@ -162,6 +168,9 @@ def compression(input_xes, input_lpms, limit, out_xes, prefix, suffix):
                 # if the index that appears multiple times is contained in the current lpm 
                 if(max_index in lpms_event_list):
                     
+                    # if the current event appears in final markings
+                    # and is not in the list of found final markings
+                    # adding it to the list
                     if(event._dict["concept:name"] in final_markings
                     and event._dict["concept:name"] not in f_marking_found):
                         f_marking_found.append(event._dict["concept:name"])
@@ -174,7 +183,6 @@ def compression(input_xes, input_lpms, limit, out_xes, prefix, suffix):
                     and event._dict["concept:name"] in final_markings
                     and next._dict["concept:name"] in initial_markings):
                         new_trace = True
-                    
 
                     # if a previous event exists, and its name is equal to the current event,
                     # and the initial_markings is equal to the final markings, it means
@@ -203,14 +211,19 @@ def compression(input_xes, input_lpms, limit, out_xes, prefix, suffix):
                         
                         # is incremented to iterate on the next event
                         index += 1
+                    
+                    # if there are more final events in parallel
+                    # and they're equal to final founds
+                    # a new trace is starting
                     if( is_parallel['final'] == True
                     and sorted(f_marking_found) == final_markings):
                         new_trace = True
+
+                        # resetting list of final markings
                         f_marking_found = []
                 else:
                     # if the index of the most frequent does not appear in the list of lpms.
                     # you delete the list of lpms.
-                    
                     del event._dict["LPMs_list"]
                     del event._dict["LPMs_binary"]
                     del event._dict["LPMs_frequency"]
@@ -218,14 +231,13 @@ def compression(input_xes, input_lpms, limit, out_xes, prefix, suffix):
                     
                     # must be none here
                     prev = None
-
+                    
+                    # resetting list of final markings
                     f_marking_found = []
                     
                     # is incremented to iterate on the next event
                     index += 1
         iteration += 1
-
-    print(is_parallel)
 
     # overwrite file if already exists
     if Path(out_xes).exists():

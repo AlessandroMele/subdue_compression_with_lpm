@@ -37,7 +37,7 @@ Un LPM è una rete di Petri di piccole dimensioni, generalmente composta da cinq
 L’algoritmo di etichettatura, fornito dal tutor di progetto Prof.ssa<a href="https://www.tue.nl/en/research/researchers/laura-genga/"> Laura Genga</a>, richiede in input un file di log in formato *.xes* e gli LPM precedentemente ottenuti. In output, restituisce il file *.xes* originale in cui ad ogni evento è assegnata una lista che contiene, se presenti, gli indici dei LPM in cui l’evento occorre. <br>
 L’evento, per poter essere etichettato, deve comparire in una traccia valida, altrimenti non viene contrassegnato; una traccia si dice valida se percorre interamente il LPM dallo stato iniziale a quello finale, senza che rimangano token inutilizzati e senza aggiungerne dei nuovi.<br>
 Di seguito si riporta un esempio:<br>
-<img src = "images/esempio.png" width ="600px" height ="300px"></img>
+<img src = "images/esempio.png" width ="800px" height ="300px"></img>
 
 # Scelta del LPM
 Per poter sostituire gli eventi nel file di log, è necessario definire una metrica per identificare il LPM che massimizza la compressione. Per la seguente trattazione, comprimere un file di log equivale ad eliminare il maggior numero di eventi possibili. <br>
@@ -88,7 +88,7 @@ I parametri sono:
 # Testing
 La componente testata è esclusivamente quella legata allo sviluppo del modulo di compressione, ovvero il file *compression_with_lpm* sviluppato per il seguente progetto didattico.<br>
 Viene dato in input all'algoritmo di compressione un file *.xes* in cui ad ogni evento è assegnata una lista che contiene, se presenti, gli indici dei LPM in cui l’evento occorre.
-<br>Eliminazione del LPM 2:<br>
+<br>Eliminazione del LPM 1:<br>
 <img src = "images/test1.png" width ="600px" height ="200px"></img>
 <br>Eliminazione del LPM 1:<br>
 <img src = "images/test2.png" width ="600px" height ="200px"></img>

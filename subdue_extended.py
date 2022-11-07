@@ -8,18 +8,17 @@ if __name__ == '__main__':
 
     # RECOGNITION PARAMETERS
     parser.add_argument("--lpms_dir",
-    # default="./testing/LPMPaymentRequest/LPMPaymentRequest/",
-    # default="./testing/Presentazione/LPMs/",
+    default="./testing/LPMPaymentRequest/LPMPaymentRequest/",
     type=str,
     help="path to lpms (pnml or apnml format)")
 
     parser.add_argument("--raw_log_file",
-    # default="./testing/LPMPaymentRequest/RequestForPayment.xes",
+    default="./testing/LPMPaymentRequest/RequestForPayment.xes",
     type=str,
     help="path to raw xes format log file")
 
     parser.add_argument("--processed_log_file",
-    # default="./testing/LPMPaymentRequest/RequestForPayment_completeLPMs_aggregated.csv",
+    default="./testing/LPMPaymentRequest/RequestForPayment_completeLPMs_aggregated.csv",
     type=str,
     help="path to location store and name of the output file in csv format")
 
@@ -34,16 +33,14 @@ if __name__ == '__main__':
 
     # CONVERSION FROM csv TO xes PARAMETERS
     parser.add_argument('--xes_converted',
-    # default="./testing/LPMPaymentRequest/RequestForPayment_completeLPMs_converted.xes",
-    # default="./testing/Presentazione/test_7.xes",
+    default="./testing/LPMPaymentRequest/RequestForPayment_completeLPMs_converted.xes",
     type=str,
     help="path to location store and name the converted file from csv to xes format")
     ##########
                     
     # COMPRESSION PARAMETERS
     parser.add_argument('--xes_compressed',
-    # default="./testing/RequestForPayment_completeLPMs_compressed.xes",
-    # default="./testing/Presentazione/test_7_compressed.xes",
+    default="./testing/RequestForPayment_completeLPMs_compressed.xes",
     type=str,
     help="path to location store and name of the compressed output file in xes format")
     
@@ -53,14 +50,12 @@ if __name__ == '__main__':
     help = "number of iteration of the compression module (for further developments)")
 
     parser.add_argument('--prefix',
-    # default="testLaura_",
-    # default="lpm",
+    default="testLaura_",
     type=str,
     help = "template filename of lpm")
 
     parser.add_argument('--suffix',
-    # default="pnml",
-    # default="apnml",
+    default="pnml",
     type=str,
     help = "extension of lpm")
 
@@ -105,5 +100,5 @@ if __name__ == '__main__':
 
     # PRESENTAZIONE
     """
-    python3 subdue_extended.py --lpms_dir=./testing/Presentazione/LPMs/ --xes_converted=./testing/Presentazione/test_5.xes --xes_compressed=./testing/Presentazione/test_5_compressed.xes --prefix=lpm --suffix=apnml
+    python3 subdue_extended.py --lpms_dir=./testing/Presentazione/LPMs/ --xes_converted=./testing/Presentazione/test_1.xes --xes_compressed=./testing/Presentazione/test_1_compressed.xes --prefix=lpm --suffix=apnml
     """
