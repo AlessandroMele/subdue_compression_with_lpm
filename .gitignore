@@ -4,16 +4,12 @@ testing/LPMPaymentRequest/RequestForPayment_completeLPMs_converted.xes
 testing/LPMPaymentRequest/RequestForPayment_completeLPMs_compressed.xes
 
 testing/BPI12_w
-testing/BPI12_w/BPI12_w.xes
-testing/BPI12_w/BPI12_w_completeLPMs_aggregated.csv
-testing/BPI12_w/BPI12_w_completeLPMs_aggregated.xes
-testing/BPI12_w/BPI12_w_completeLPMs_compressed.xes
 
 source/__pycache__
 
 Relazione.zip
-Presentazione.pptx
-~$Presentazione.pptx
-print_lpm.py
+
+Presentazione_BDA&ML.pptx
+~$Presentazione_BDA&ML.pptx
 
 .vscode

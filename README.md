@@ -43,13 +43,13 @@ Di seguito si riporta un esempio:<br>
 Per poter sostituire gli eventi nel file di log, è necessario definire una metrica per identificare il LPM che massimizza la compressione. Per la seguente trattazione, comprimere un file di log equivale ad eliminare il maggior numero di eventi possibili. <br>
 Le possibili metriche esaminate sono:
 - numero di eventi contrassegnati con il LPM: calcolata come il numero di eventi in cui occorre l’indice relativo al LPM;
-- numero di tracce che percorrono il LPM moltiplicato per il numero di transizioni del LPM; è il metodo che maggiormente si avvicina alla metrica utilizzata da Subdue e si calcola come *numeroTracce\*DimensioneLPM*.
+- numero di tracce che percorrono il LPM per il numero di transizioni del LPM; è il metodo che maggiormente si avvicina alla metrica utilizzata da Subdue e si calcola come *numeroTracce\*DimensioneLPM*.<br>
 L’algoritmo definito nella sezione precedente restituisce il file *.xes* originale in cui ad ogni evento è assegnata una lista che contiene, se presenti, gli indici dei LPM in cui l’evento compare in una traccia valida; perciò la prima metrica è facile da calcolare, poiché basta scorrere il file di log e selezionare il LPM il cui indice compare il maggior numero di volte.<br>
 Inoltre, tale metrica definisce esattamente il numero di eventi che saranno sostituiti, perciò si adatta meglio all’obiettivo del progetto.
 
 # Eliminazione del LPM scelto
 Dopo aver individuato il LPM candidato, si comprime il file di log modificando o eliminando gli eventi. Per far ciò, verrà utilizzata una variabile booleana per determinare se l’evento corrente è il primo di una traccia valida per il LPM candidato, ed in questo caso viene sostituito da un evento con nome *LPM:numLPM_numIterazione*, altrimenti viene eliminato. <br>
-Inoltre, sarà necessario eliminare in ogni evento l’attributo *LPMs*, perché ogni evento verrà etichettato nuovamente nella successiva iterazione.
+Inoltre, sarà necessario eliminare gli attributi *LPMs_list*, *LPMs_Binary* e *LPMs_Frequency* dell'evento, perché verrà etichettato di nuovo nella successiva iterazione.
 
 # Eseguire il programma
 Il programma può essere eseguito sia da editor che da linea di comando. <br>
