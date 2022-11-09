@@ -8,7 +8,7 @@ if __name__ == '__main__':
 
     # RECOGNITION PARAMETERS
     parser.add_argument("--lpms_dir",
-    default="./testing/LPMPaymentRequest/LPMPaymentRequest/",
+    default="./testing/LPMPaymentRequest/LPMs/",
     type=str,
     help="path to lpms (pnml or apnml format)")
 
@@ -40,7 +40,7 @@ if __name__ == '__main__':
                     
     # COMPRESSION PARAMETERS
     parser.add_argument('--xes_compressed',
-    default="./testing/RequestForPayment_completeLPMs_compressed.xes",
+    default="./testing/LPMPaymentRequest/RequestForPayment_completeLPMs_compressed.xes",
     type=str,
     help="path to location store and name of the compressed output file in xes format")
     
@@ -68,14 +68,10 @@ if __name__ == '__main__':
     event_log_address = args.raw_log_file
     output_address_name_file = args.processed_log_file
     lpms_folder_name = args.lpms_dir
-    
-    lpm_det.lpm_detection(min_prefix_size, max_prefix_size, event_log_address, output_address_name_file, lpms_folder_name)
     ##########
 
     # CONVERSION FROM csv TO xes MODULE
     xes_converted = args.xes_converted
-    
-    log_conv.from_csv_to_xes(output_address_name_file, xes_converted)
     ##########
 
     # COMPRESSION MODULE
@@ -83,8 +79,19 @@ if __name__ == '__main__':
     limit = args.limit
     prefix = args.prefix
     suffix = args.suffix
-    lpm_comp.compression(xes_converted, lpms_folder_name, limit, xes_compressed, prefix, suffix)
     ##########
+
+    iteration = 0
+    while(iteration<limit):
+        if(iteration != 0):
+            event_log_address = xes_compressed
+        
+        # for testing only compression module
+        # lpm_det.lpm_detection(min_prefix_size, max_prefix_size, event_log_address, output_address_name_file, lpms_folder_name)
+        # log_conv.from_csv_to_xes(output_address_name_file, xes_converted)
+        
+        lpm_comp.compression(xes_converted, lpms_folder_name, xes_compressed, prefix, suffix, iteration)
+        iteration += 1
 
     # TEST LPMPaymentRequest
     """
@@ -100,5 +107,5 @@ if __name__ == '__main__':
 
     # PRESENTAZIONE
     """
-    python3 subdue_extended.py --lpms_dir=./testing/Presentazione/LPMs/ --xes_converted=./testing/Presentazione/test_1.xes --xes_compressed=./testing/Presentazione/test_1_compressed.xes --prefix=lpm --suffix=apnml
+    python3 subdue_extended.py --lpms_dir=./testing/Presentazione/LPMs/ --xes_converted=./testing/Presentazione/test_7.xes --xes_compressed=./testing/Presentazione/test_7_compressed.xes --prefix=lpm --suffix=apnml
     """

@@ -97,7 +97,7 @@ def extract_initial_final_markings(input_lpms, num, prefix, suffix):
 
         return ordered_initial_markings, ordered_final_markings
 
-def compression(input_xes, input_lpms, limit, out_xes, prefix, suffix):
+def compression(input_xes, input_lpms, out_xes, prefix, suffix, iteration):
     """
     Count number of occurrences in xes file, and each time that LPM appears, increasing relative index
     on the list
@@ -112,132 +112,150 @@ def compression(input_xes, input_lpms, limit, out_xes, prefix, suffix):
     count_list = [0 for i in range(number_lpms_files)]
 
     # calculating most frequent index of LPMs
-    iteration = 0
-    while(iteration < limit):
-        for trace in file_xes:
-            for event in trace:
+    for trace in file_xes:
+        for event in trace:
+            
+            # extracting list of lpms
+            lpms_event_string = event._dict["LPMs_list"]
+            lpms_event_list = extract_list(lpms_event_string)
+            
+            # iterating on list values
+            for lpm in lpms_event_list:
+                # in the algorythm LPMs start from one, while in the list from zero
+                count_list[lpm] += 1
                 
-                lpms_event_string = event._dict["LPMs_list"]
-                lpms_event_list = extract_list(lpms_event_string)
-                
-                # iterating on list values
-                for lpm in lpms_event_list:
-                    # in the algorythm LPMs start from one, while in the list from zero
-                    count_list[lpm] += 1
-                    
-        # most frequent index of LPMs
-        max_index = count_list.index(max(count_list))
+    # most frequent index of LPMs
+    max_index = count_list.index(max(count_list))
+    
+    for index, elem in enumerate(count_list):
+        print("Index: "+str(index)+" | Count: "+str(elem))
+    print("LPM max index: "+str(max_index))
+
+    # extracting list of initial and final markings
+    initial_markings, final_markings = extract_initial_final_markings(input_lpms, max_index, prefix, suffix)
+
+    """
+    Having found the LPMS that compresses the most, one modifies the xes by scrolling through the traces, and for each event,
+    you check whether the index to be deleted appears in the LPMs attribute; if so,
+    if the event is the first in the trace, the name is modified, otherwise the
+    the event itself
+    """
+    for trace in file_xes:
+
+        # index represents the index of the event on which it is iterating
+        index = 0
+
+        # true if the event is not labeled with the index of the most frequent lpm
+        different_lpm_event = True
+
+        # a new trace is starting
+        new_trace = True
         
-        for index, elem in enumerate(count_list):
-            print("Index: "+str(index)+" | Count: "+str(elem))
-        print("LPM max index: "+str(max_index))
+        # list that contains all the final markings found
+        f_marking_found = []
 
-        # extracting list of initial and final markings
-        initial_markings, final_markings = extract_initial_final_markings(input_lpms, max_index, prefix, suffix)
+        # previous element is none
+        prev = None
 
-        """
-        Having found the LPMS that compresses the most, one modifies the xes by scrolling through the traces, and for each event,
-        you check whether the index to be deleted appears in the LPMs attribute; if so,
-        if the event is the first in the trace, the name is modified, otherwise the
-        the event itself
-        """
-        for trace in file_xes:
+        while(index < len(trace)):
 
-            # index represents the index of the event on which it is iterating
-            index = 0
+            # setting the current event
+            event = trace[index]
+            
+            # setting the next event equal to the current +1
+            next = trace[index+1] if index<len(trace)-1 else None
 
-            new_trace = True
-            # list that contains all the final markings found
-            f_marking_found = []
+            # we get the value of LPMs in the form of list of numeric values
+            lpms_event_string = event._dict["LPMs_list"]
+            lpms_event_list = extract_list(lpms_event_string)
+            
+            # if the index that appears multiple times is contained in the current lpm 
+            if(max_index in lpms_event_list):
 
-            prev = None
+                # if the current event appears in final markings
+                # and is not in the list of found final markings
+                # adding it to the list
+                if(event._dict["concept:name"] in final_markings
+                and event._dict["concept:name"] not in f_marking_found):
+                    f_marking_found.append(event._dict["concept:name"])
 
-            while(index < len(trace)):
-                # setting the current event
-                event = trace[index]
+                # if the the current event name appears in final markings,
+                # and the next exists, and its name appears in initial markings,
+                # new trace is starting
+                if( is_parallel['final'] == False
+                and next
+                and event._dict["concept:name"] in final_markings
+                and next._dict["concept:name"] in initial_markings):
+                    new_trace = True
+
+                # if a previous event exists, and its name is equal to the current event,
+                # and the initial_markings is equal to the final markings, it means
+                # that it's a loop, so a new trace is must start
+                if( prev
+                and prev == event._dict["concept:name"]
+                and initial_markings == final_markings):
+                    new_trace = True
                 
-                # setting the next event equal to the current +1
-                next = trace[index+1] if index<len(trace)-1 else None
+                # if the event is not labeled with the index of the most frequent lpm
+                # and the current event is in initial_markings, it's starting a new trace
+                if( different_lpm_event
+                and event._dict["concept:name"] in initial_markings):
+                    new_trace = True
 
-                # we get the value of LPMs in the form of "[v1, ..., vN]"
-                lpms_event_string = event._dict["LPMs_list"]
-                
-                # we convert to list of numeric values [v1, ..., vN]
-                lpms_event_list = extract_list(lpms_event_string)
-                
-                # if the index that appears multiple times is contained in the current lpm 
-                if(max_index in lpms_event_list):
+                different_lpm_event = False
+
+                # setting the previous event equal to the current one
+                prev = event._dict["concept:name"]
+
+                # event name is replaced, otherwise the event itself is deleted.
+                if(not new_trace):
                     
-                    # if the current event appears in final markings
-                    # and is not in the list of found final markings
-                    # adding it to the list
-                    if(event._dict["concept:name"] in final_markings
-                    and event._dict["concept:name"] not in f_marking_found):
-                        f_marking_found.append(event._dict["concept:name"])
+                    # you delete the event
+                    del trace._list[index]
 
-                    # if the the current event name appears in final markings,
-                    # and the next exists, and its name appears in initial markings,
-                    # new trace is starting
-                    if( is_parallel['final'] == False
-                    and next
-                    and event._dict["concept:name"] in final_markings
-                    and next._dict["concept:name"] in initial_markings):
-                        new_trace = True
-
-                    # if a previous event exists, and its name is equal to the current event,
-                    # and the initial_markings is equal to the final markings, it means
-                    # that it's a loop, so a new trace is must start
-                    if( prev
-                    and prev == event._dict["concept:name"]
-                    and initial_markings == final_markings):
-                        new_trace = True
-
-                    # setting the previous event equal to the current one
-                    prev = event._dict["concept:name"]
-
-                    # event name is replaced, otherwise the event itself is deleted.
-                    if(not new_trace):
-                        # you delete the event
-                        del trace._list[index]
-
-                    else:
-                        new_trace = False
-                        # you replace the name and delete the list of lpm.
-                        event._dict['concept:name'] = 'LPM:'+str(max_index)+'_'+str(iteration)
-                        
-                        del event._dict["LPMs_list"]
-                        del event._dict["LPMs_binary"]
-                        del event._dict["LPMs_frequency"]
-                        
-                        # is incremented to iterate on the next event
-                        index += 1
-                    
-                    # if there are more final events in parallel
-                    # and they're equal to final founds
-                    # a new trace is starting
-                    if( is_parallel['final'] == True
-                    and sorted(f_marking_found) == final_markings):
-                        new_trace = True
-
-                        # resetting list of final markings
-                        f_marking_found = []
                 else:
-                    # if the index of the most frequent does not appear in the list of lpms.
-                    # you delete the list of lpms.
+                    
+                    new_trace = False
+                    
+                    # you replace the name and delete the list of lpm.
+                    event._dict['concept:name'] = 'LPM:'+str(max_index)+'_'+str(iteration)
                     del event._dict["LPMs_list"]
                     del event._dict["LPMs_binary"]
                     del event._dict["LPMs_frequency"]
+                    
+                    # index is incremented to iterate on the next event
+                    index += 1
+                
+                # if there are more final events in parallel
+                # and they're equal to final founds
+                # a new trace is starting
+                if( is_parallel['final'] == True
+                and sorted(f_marking_found) == final_markings):
+                    
+                    # a new trace is starting
                     new_trace = True
-                    
-                    # must be none here
-                    prev = None
-                    
+
                     # resetting list of final markings
                     f_marking_found = []
-                    
-                    # is incremented to iterate on the next event
-                    index += 1
-        iteration += 1
+            else:
+
+                different_lpm_event = True
+
+                # if the index of the most frequent does not appear in the list of lpms.
+                # you delete the list of lpms.
+                del event._dict["LPMs_list"]
+                del event._dict["LPMs_binary"]
+                del event._dict["LPMs_frequency"]
+                
+                new_trace = True
+                
+                prev = None
+                
+                # resetting list of final markings
+                f_marking_found = []
+                
+                # is incremented to iterate on the next event
+                index += 1
 
     # overwrite file if already exists
     if Path(out_xes).exists():
