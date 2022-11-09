@@ -21,7 +21,7 @@
 		<event>
 			<string key="org:resource" value="NONE" />
 			<string key="lifecycle:transition" value="complete" />
-			<string key="concept:name" value="B" />
+			<string key="concept:name" value="A" />
 			<date key="time:timestamp" value="2013-12-01T09:01:24.772000+01:00" />
 			<string key="LPMs_list" value="+LPM_2+" />
 			<float key="LPMs_binary" value="0.0" />
@@ -30,7 +30,7 @@
 		<event>
 			<string key="org:resource" value="NONE" />
 			<string key="lifecycle:transition" value="complete" />
-			<string key="concept:name" value="B" />
+			<string key="concept:name" value="A" />
 			<date key="time:timestamp" value="2013-12-01T08:01:24.772000+01:00" />
 			<string key="LPMs_list" value="+LPM_2+" />
 			<float key="LPMs_binary" value="0.0" />
